@@ -11,7 +11,7 @@ function App() {
       <main>
         <p>Enter numbers separated by commas (,) or on separate lines, then hit Add</p>
         <Calculator />
-        <p>Note: no negative numbers are allowed.</p>
+        <p>Note: no negative numbers are allowed, and numbers over 1000 will be ignored.</p>
       </main>
     </div>
   );

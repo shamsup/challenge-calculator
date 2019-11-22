@@ -60,3 +60,11 @@ it('should throw an exception when negative numbers are given', () => {
   const input = '4,-3,-5,6';
   expect(() => calculate(input)).toThrow('No negative numbers allowed, found -3, -5');
 });
+
+it('should treat numbers over 1000 as invalid', () => {
+  const input = '2,1001,6';
+  const expected = 8;
+
+  const actual = calculate(input);
+  expect(actual).toBe(expected);
+});
