@@ -50,17 +50,17 @@ it('should not render an error after a successful calculation', () => {
 it('should render the error message of failed a calculation', () => {
   const wrapper = shallow(<Calculator />);
 
-  const event = submitEventWithValue('1,1,1');
+  const event = submitEventWithValue(undefined);
   wrapper.find('form').simulate('submit', event);
 
   const error = wrapper.find('.calculator-error');
   expect(error).toExist();
-  expect(error.text()).toBe('Only 2 numbers are allowed')
+  expect(error.text()).toBeTruthy()
 });
 
 it('should clear not display an error after a successful calculation after an error', () => {
   const wrapper = shallow(<Calculator />);
-  let event = submitEventWithValue('1,1,1');
+  let event = submitEventWithValue(undefined);
 
   wrapper.find('form').simulate('submit', event);
 
@@ -85,7 +85,7 @@ it('should not render the result before a calculation', () => {
 it('should not render the result after a failed calculation', () => {
   const wrapper = shallow(<Calculator />);
 
-  const event = submitEventWithValue('1,1,1');
+  const event = submitEventWithValue(undefined);
   wrapper.find('form').simulate('submit', event);
 
   const result = wrapper.find('.calculator-result');
@@ -112,7 +112,7 @@ it('should not render the result after a failed calculation after a successful c
   let result = wrapper.find('.calculator-result');
   expect(result).toExist();
 
-  event = submitEventWithValue('1,1,1');
+  event = submitEventWithValue(undefined);
   wrapper.find('form').simulate('submit', event);
 
   result = wrapper.find('.calculator-result');

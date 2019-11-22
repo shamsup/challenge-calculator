@@ -8,6 +8,14 @@ it('should add two numbers', () => {
   expect(actual).toBe(expected);
 });
 
+it('should add all given numbers', () => {
+  const input = '1,2,3,4,5,6,7,8,9,10,11,12';
+  const expected = 78;
+
+  const actual = calculate(input);
+  expect(actual).toBe(expected);
+});
+
 it('should default empty input to zero', () => {
   const input = '';
   const expected = 0;
@@ -24,55 +32,18 @@ it('should allow a single number with no delimiter', () => {
   expect(actual).toBe(expected);
 });
 
-it('should default missing numbers to zero - both numbers', () => {
-  const input = ',';
-  const expected = 0;
+it('should default missing numbers to zero', () => {
+  const input = ',15,,20,';
+  const expected = 35;
 
   const actual = calculate(input);
   expect(actual).toBe(expected);
 });
 
-it('should default missing numbers to zero - first number', () => {
-  const input = ',10';
-  const expected = 10;
+it('should default invalid numbers to zero', () => {
+  const input = 'abc,15,a,20,tytyty';
+  const expected = 35;
 
   const actual = calculate(input);
   expect(actual).toBe(expected);
-});
-
-it('should default missing numbers to zero - second number', () => {
-  const input = '10,';
-  const expected = 10;
-
-  const actual = calculate(input);
-  expect(actual).toBe(expected);
-});
-
-it('should default invalid numbers to zero - both numbers', () => {
-  const input = 'abc,ab';
-  const expected = 0;
-
-  const actual = calculate(input);
-  expect(actual).toBe(expected);
-});
-
-it('should default invalid numbers to zero - first number', () => {
-  const input = 'abc,15';
-  const expected = 15;
-
-  const actual = calculate(input);
-  expect(actual).toBe(expected);
-});
-
-it('should default invalid numbers to zero - second number', () => {
-  const input = '5,tytyty';
-  const expected = 5;
-
-  const actual = calculate(input);
-  expect(actual).toBe(expected);
-});
-
-it('should throw an exception if more than two numbers are given', () => {
-  const input = '1,1,1';
-  expect(() => calculate(input)).toThrow('Only 2 numbers are allowed')
 });
