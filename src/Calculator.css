@@ -1,17 +1,24 @@
-.calculator input, .calculator button {
-  font-size: 1rem;
-  margin-top: 1rem;
-}
-
 .calculator form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 1rem;
 }
 
-.calculator-result {
+.calculator textarea,
+.calculator button {
+  font-size: 1rem;
+}
+
+.calculator button {
+  margin-top: 0.5rem;
+}
+
+.calculator-result,
+.calculator-error {
   font-size: 1.25rem;
 }
 
 .calculator-error {
-  font-size: 1.25rem;
   color: #cc0000;
 }

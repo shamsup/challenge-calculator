@@ -47,3 +47,11 @@ it('should default invalid numbers to zero', () => {
   const actual = calculate(input);
   expect(actual).toBe(expected);
 });
+
+it('should allow the newline (\\n) character as a delimiter', () => {
+  const input = '1\n2,3';
+  const expected = 6;
+
+  const actual = calculate(input);
+  expect(actual).toBe(expected);
+});

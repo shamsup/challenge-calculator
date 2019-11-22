@@ -9,7 +9,7 @@ function App() {
         <h1>Calculator</h1>
       </header>
       <main>
-        <p>Enter numbers separated by commas (,) then hit Add</p>
+        <p>Enter numbers separated by commas (,) or on separate lines, then hit Add</p>
         <Calculator />
       </main>
     </div>

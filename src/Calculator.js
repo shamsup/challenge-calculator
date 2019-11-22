@@ -20,7 +20,7 @@ const Calculator = () => {
   return (
     <div className="calculator">
       <form onSubmit={handleSubmit}>
-        <input name="numbers" />
+        <textarea name="numbers" />
         <button type="submit">Add</button>
       </form>
       {

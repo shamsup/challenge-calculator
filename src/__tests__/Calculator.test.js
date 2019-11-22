@@ -21,9 +21,9 @@ it('should render a form with a single input and a submit button', () => {
   const form = wrapper.find('form');
   expect(form).toExist();
 
-  const input = form.find('input');
-  expect(input).toExist();
-  expect(input.prop('name')).toBe('numbers');
+  const textarea = form.find('textarea');
+  expect(textarea).toExist();
+  expect(textarea.prop('name')).toBe('numbers');
 
   const submitButton = form.find('button');
   expect(submitButton).toExist();
