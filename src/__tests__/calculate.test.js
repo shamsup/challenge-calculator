@@ -1,8 +1,8 @@
 import calculate from '../calculate';
 
 it('should add two numbers', () => {
-  const input = '4,-3';
-  const expected = 1;
+  const input = '4,3';
+  const expected = 7;
 
   const actual = calculate(input);
   expect(actual).toBe(expected);
@@ -54,4 +54,9 @@ it('should allow the newline (\\n) character as a delimiter', () => {
 
   const actual = calculate(input);
   expect(actual).toBe(expected);
+});
+
+it('should throw an exception when negative numbers are given', () => {
+  const input = '4,-3,-5,6';
+  expect(() => calculate(input)).toThrow('No negative numbers allowed, found -3, -5');
 });
