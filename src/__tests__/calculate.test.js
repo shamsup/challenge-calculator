@@ -90,3 +90,11 @@ it('should allow defining a custom multi-character delimiter', () => {
   const actual = calculate(input);
   expect(actual).toBe(expected);
 });
+
+it('should allow defining multiple custom delimiters', () => {
+  const input = '//[*][|][!!][r9r]\n11r9r22*hh|33!!44';
+  const expected = 110;
+
+  const actual = calculate(input);
+  expect(actual).toBe(expected);
+});

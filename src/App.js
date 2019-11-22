@@ -17,6 +17,8 @@ function App() {
         <pre><code>{'//#\n2#5'}</code></pre>
         <p>You can use a custom multi-character delimiter by using the format below:</p>
         <pre><code>{'//[***]\n11***22***33'}</code></pre>
+        <p>You can also provide multiple delimiters by repeating the above format, like the following:</p>
+        <pre><code>{'//[*][!!][r9r]\n11r9r22*33!!44'}</code></pre>
       </main>
     </div>
   );

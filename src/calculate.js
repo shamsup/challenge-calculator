@@ -1,18 +1,51 @@
+import flatMap from 'lodash/flatMap';
+
 const newlineOrComma = /(,|\n)/;
 const testCustomSingleDelimiter = /^\/\/(.)\n/;
 const testCustomMultiDelimiter = /^\/\/\[([^\]]+)\]\n/;
+const testMultipleDelimiters = /^\/\/((\[[^\]]+\]){2,})\n/;
 
-const delimiterRules = [testCustomSingleDelimiter, testCustomMultiDelimiter];
+function replaceDelimiter(rule, input) {
+  const delimiter = input.match(rule)[1];
+  input = input.replace(rule, '');
+  return input.split(delimiter);
+}
+
+function replaceMultipleDelimiters(rule, input) {
+  // '[*][!!][r9r]'
+  let delimiterString = input.match(rule)[1];
+  // '*][!!][r9r'
+  delimiterString = delimiterString.slice(1, -1);
+  // ['*', '!!', 'r9r']
+  const delimiters = delimiterString.split('][');
+
+  input = input.replace(rule, '');
+  return delimiters.reduce((values, delimiter) => {
+    return flatMap(values, v => v.split(delimiter));
+  }, [input]);
+}
+
+const processors = new Map();
+processors.set(testCustomSingleDelimiter, replaceDelimiter);
+processors.set(testCustomMultiDelimiter, replaceDelimiter);
+processors.set(testMultipleDelimiters, replaceMultipleDelimiters);
+
+const delimiterRules = [
+  testCustomSingleDelimiter,
+  testCustomMultiDelimiter,
+  testMultipleDelimiters
+];
 
 function getNumbersFromInput(input) {
-  let delimiter = newlineOrComma;
-  let matchedRule = delimiterRules.find(rule => rule.test(input));
+  const matchedRule = delimiterRules.find(rule => rule.test(input));
+  let numbers;
   if (matchedRule) {
-    delimiter = input.match(matchedRule)[1];
-    input = input.replace(matchedRule, '');
+    numbers = processors.get(matchedRule)(matchedRule, input);
+  } else {
+    numbers = input.split(newlineOrComma);
   }
 
-  return input.split(delimiter)
+  return numbers
     // handle invalid and empty values, cast to number
     .map(n => Number(n) || 0);
 }
