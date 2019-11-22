@@ -1,5 +1,16 @@
+const newlineOrComma = /(,|\n)/;
+const testCustomDelimiter = /^\/\/(.)\n/;
+
 export default function calculate(input) {
-  const numbers = input.split(/(,|\n)/)
+  let delimiter = newlineOrComma;
+  const customDelimiter = input.match(testCustomDelimiter);
+  if (customDelimiter) {
+    // grab first capturing group from match
+    delimiter = customDelimiter[1];
+    input = input.replace(testCustomDelimiter, '');
+  }
+
+  const numbers = input.split(delimiter)
     // handle invalid and empty values, cast to number
     .map(n => Number(n) || 0)
     // exclude numbers over 1000

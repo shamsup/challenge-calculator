@@ -68,3 +68,17 @@ it('should treat numbers over 1000 as invalid', () => {
   const actual = calculate(input);
   expect(actual).toBe(expected);
 });
+
+it('should allow defining a custom delimiter', () => {
+  let input = '//#\n2#5';
+  let expected = 7;
+
+  let actual = calculate(input);
+  expect(actual).toBe(expected);
+
+  input = '//,\n2,ff,100';
+  expected = 102;
+
+  actual = calculate(input);
+  expect(actual).toBe(expected);
+});
