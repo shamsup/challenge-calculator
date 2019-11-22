@@ -1,18 +1,24 @@
 const newlineOrComma = /(,|\n)/;
-const testCustomDelimiter = /^\/\/(.)\n/;
+const testCustomSingleDelimiter = /^\/\/(.)\n/;
+const testCustomMultiDelimiter = /^\/\/\[([^\]]+)\]\n/;
 
-export default function calculate(input) {
+const delimiterRules = [testCustomSingleDelimiter, testCustomMultiDelimiter];
+
+function getNumbersFromInput(input) {
   let delimiter = newlineOrComma;
-  const customDelimiter = input.match(testCustomDelimiter);
-  if (customDelimiter) {
-    // grab first capturing group from match
-    delimiter = customDelimiter[1];
-    input = input.replace(testCustomDelimiter, '');
+  let matchedRule = delimiterRules.find(rule => rule.test(input));
+  if (matchedRule) {
+    delimiter = input.match(matchedRule)[1];
+    input = input.replace(matchedRule, '');
   }
 
-  const numbers = input.split(delimiter)
+  return input.split(delimiter)
     // handle invalid and empty values, cast to number
-    .map(n => Number(n) || 0)
+    .map(n => Number(n) || 0);
+}
+
+export default function calculate(input) {
+  const numbers = getNumbersFromInput(input)
     // exclude numbers over 1000
     .filter(n => n <= 1000);
 

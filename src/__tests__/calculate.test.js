@@ -69,7 +69,7 @@ it('should treat numbers over 1000 as invalid', () => {
   expect(actual).toBe(expected);
 });
 
-it('should allow defining a custom delimiter', () => {
+it('should allow defining a custom single-character delimiter', () => {
   let input = '//#\n2#5';
   let expected = 7;
 
@@ -80,5 +80,13 @@ it('should allow defining a custom delimiter', () => {
   expected = 102;
 
   actual = calculate(input);
+  expect(actual).toBe(expected);
+});
+
+it('should allow defining a custom multi-character delimiter', () => {
+  const input = '//[***]\n11***22***33';
+  const expected = 66;
+
+  const actual = calculate(input);
   expect(actual).toBe(expected);
 });
