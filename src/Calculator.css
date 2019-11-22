@@ -1,0 +1,17 @@
+.calculator input, .calculator button {
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.calculator form {
+  margin-bottom: 1rem;
+}
+
+.calculator-result {
+  font-size: 1.25rem;
+}
+
+.calculator-error {
+  font-size: 1.25rem;
+  color: #cc0000;
+}
